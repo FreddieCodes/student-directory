@@ -23,13 +23,18 @@ def print_header
     puts "-------------"
 end
 
-# addes a new argument letter with a default value of nil, so if no letter is entered the 
+# added a new argument letter with a default value of nil, so if no letter is entered the 
 # entire array will be intact
 def print(students, letter = nil) 
+    # Only prints out the students whose names are shorter than 12 characters
+    students.select! { |student| student[:name].length < 12 }
+    
+    # gets the letter from the user
     puts "Do you want to print out the students beginning with a certain letter?"
     puts "If so input that letter now followed by return, if not just press return:"
-    # gets the letter from the user
+    
     letter = gets.chomp
+    
     # takes the student array and runs the select method on it then passes it a block that
     # targets the starting letter of the students name [:name] and only selects the elements that
     # are true and stores them in array form.
@@ -38,7 +43,7 @@ def print(students, letter = nil)
     # used each_with_index to call a block with two arguments for each item in the enum.
     # The "+1" next to index in the string interpolation is to make the iteration start at 1 instead of 0.
     students.each_with_index do |student, index|
-       puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
     
 end
