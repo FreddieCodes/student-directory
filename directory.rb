@@ -23,13 +23,24 @@ def print_header
     puts "-------------"
 end
 
-# modified the students method to allow it to print a number before each of each student
-# used each_with_index to call a block with two arguments for each item in the enum.
-# The "+1" next to index in the string interpolation is to make the iteration start at 1 instead of 0.
-def print(students)
+# addes a new argument letter with a default value of nil, so if no letter is entered the 
+# entire array will be intact
+def print(students, letter = nil) 
+    puts "Do you want to print out the students beginning with a certain letter?"
+    puts "If so input that letter now followed by return, if not just press return:"
+    # gets the letter from the user
+    letter = gets.chomp
+    # takes the student array and runs the select method on it then passes it a block that
+    # targets the starting letter of the students name [:name] and only selects the elements that
+    # are true and stores them in array form.
+    students.select! { |student| student[:name].start_with?(letter) }
+    # modified the students method to allow it to print a number before each of each student
+    # used each_with_index to call a block with two arguments for each item in the enum.
+    # The "+1" next to index in the string interpolation is to make the iteration start at 1 instead of 0.
     students.each_with_index do |student, index|
-      puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort)"
+       puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
+    
 end
 
 def print_footer(names)
