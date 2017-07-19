@@ -23,9 +23,12 @@ def print_header
     puts "-------------"
 end
 
+# modified the students method to allow it to print a number before each of each student
+# used each_with_index to call a block with two arguments for each item in the enum.
+# The "+1" next to index in the string interpolation is to make the iteration start at 1 instead of 0.
 def print(students)
-    students.each do |student|
-      puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    students.each_with_index do |student, index|
+      puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
 end
 
