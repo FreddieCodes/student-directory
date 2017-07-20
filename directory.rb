@@ -9,7 +9,8 @@ def input_students
     # while the name is not empty, repeat this code
     while !name.empty? do
         # add the student hash to the array
-        students << {name: name, cohort: :november}
+        # added more information hobbies, country and height
+        students << {name: name, cohort: :november, hobbies: :reading, country: :UK, height: :tall}
         puts "Now we have #{students.count} students"
         # get another name from the user
         name = gets.chomp
@@ -27,7 +28,7 @@ end
 # entire array will be intact
 def print(students, letter = nil) 
     # Only prints out the students whose names are shorter than 12 characters
-    students.select! { |student| student[:name].length < 12 }
+    students.select { |student| student[:name].length < 12 }
     
     # gets the letter from the user
     puts "Do you want to print out the students beginning with a certain letter?"
@@ -47,6 +48,7 @@ def print(students, letter = nil)
     end
     
 end
+
 
 def print_footer(names)
     puts "Overall, we have #{names.count} great students"
