@@ -66,6 +66,17 @@ def print(students, letter = nil)
     
 end
 
+# Prints the students grouped by cohort using the group_by method.
+def print_cohorts(students)
+    students = students.group_by {|hash| hash[:cohort]}.values
+    students.each do |student|
+        student.each_with_index do |stu, index|
+            puts "#{index +1}. #{stu[:name]} (#{stu[:cohort]} cohort)".center(100)
+        end
+    end
+end
+
+
 # added an if statement to pluralise "student" if the name count was greater than 1 
 def print_footer(names)
     if names.count > 1
@@ -77,6 +88,7 @@ end
 
 students = input_students
 # nothing happends until we call the methods
-print_header
-print(students)
-print_footer(students)
+# print_header
+print_cohorts(students)
+#print(students)
+#print_footer(students)
