@@ -18,22 +18,24 @@ def input_students
     end
     # while the name is not empty, repeat this code
     while !name.empty? do
-        # this line says that if cohort is equal to a blank string that's been converted to a symbol
-        # then the default value for cohort will be set to :november
+     
         cohort = :november if cohort == :""
-        # add the student hash to the array
-        # added more information hobbies, country and height
+      
         students << {name: name, cohort: cohort, hobbies: :reading, country: :UK, height: :tall}
-        puts "Now we have #{students.count} students"
-        # get another name from the user
+        @s_count = students.length
+        if @s_count > 1
+          puts "Now we have #{@s_count} students"
+        elsif @s_count == 1 
+          puts "Now we have #{@s_count} student"
+        end
+        
         puts "Please enter the name of the next student:"
         puts "(To finish, just hit return twice)"
         name = gets.gsub(/\n/, "")
-        # stops the program for asking for the cohort if the name field is blank
+
         puts "What cohort is this student in:" if name != ""
         cohort = gets.gsub(/\n/, "").downcase.to_sym  
     end
-    # return the array of students
     students
 end
 
@@ -62,9 +64,7 @@ def print(students, letter = nil)
     # used a while loop to keep executing the code while student count is more than the counter which we set to 0.
     # The "+1" next to counter in the string interpolation is to make the iteration start at 1 instead of 0.
      counter = 0
-    # .length allows us to change the students array into a number that I set to student_count
-     student_count = students.length
-      while counter < student_count
+      while counter < @s_count
         puts "#{counter+1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)".center(100)
       counter += 1
      end
@@ -83,10 +83,10 @@ end
 
 # added an if statement to pluralise "student" if the name count was greater than 1 
 def print_footer(names)
-    if names.count > 1
-      puts "Overall, we have #{names.count} great students".center(100)
-    elsif names.count == 1 
-      puts "Overall, we have #{names.count} great student".center(100)
+    if @s_count > 1
+      puts "Overall, we have #{@s_count} great students".center(100)
+    elsif @s_count == 1 
+      puts "Overall, we have #{@s_count} great student".center(100)
     end
 end
 
