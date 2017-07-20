@@ -59,9 +59,13 @@ def print(students, letter = nil)
     
 end
 
-
+# added an if statement to pluralise "student" if the name count was greater than 1 
 def print_footer(names)
-    puts "Overall, we have #{names.count} great students".center(100)
+    if names.count > 1
+      puts "Overall, we have #{names.count} great students".center(100)
+    elsif names.count == 1 
+      puts "Overall, we have #{names.count} great student".center(100)
+    end
 end
 
 students = input_students
