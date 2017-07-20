@@ -46,25 +46,12 @@ end
 
 # added a new argument letter with a default value of nil, so if no letter is entered the 
 # entire array will be intact
-def print(students, letter = nil) 
-    # Only prints out the students whose names are shorter than 12 characters
-    students.select { |student| student[:name].length < 12 }
-    
-    # gets the letter from the user
-    puts "Do you want to print out the students beginning with a certain letter?".center(100)
-    puts "If so input that letter now followed by return, if not just press return:".center(100)
-    
-    letter = gets.gsub(/\n/, "")
-    
-    # takes the student array and runs the select method on it then passes it a block that
-    # targets the starting letter of the students name [:name] and only selects the elements that
-    # are true and stores them in array form.
-    students.select! { |student| student[:name].start_with?(letter) }
-    # modified the students method to allow it to print a number before each of each student
-    # used a while loop to keep executing the code while student count is more than the counter which we set to 0.
-    # The "+1" next to counter in the string interpolation is to make the iteration start at 1 instead of 0.
-     counter = 0
-      while counter < @s_count
+def print(students)
+    if @s_count == 0
+        return
+    end
+      counter = 0
+      while counter < students.count
         puts "#{counter+1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)".center(100)
       counter += 1
      end
@@ -83,16 +70,20 @@ end
 
 # added an if statement to pluralise "student" if the name count was greater than 1 
 def print_footer(names)
-    if @s_count > 1
-      puts "Overall, we have #{@s_count} great students".center(100)
-    elsif @s_count == 1 
-      puts "Overall, we have #{@s_count} great student".center(100)
+    if @s_count == 0
+        return
+    end
+    if names.count > 1
+      puts "Overall, we have #{names.count} great students".center(100)
+    elsif names.count == 1 
+      puts "Overall, we have #{names.count} great student".center(100)
     end
 end
 
-students = input_students
+
 # nothing happends until we call the methods
 print_header
+students = input_students
 # print_cohorts(students)
 print(students)
 print_footer(students)
