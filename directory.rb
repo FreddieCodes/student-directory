@@ -20,8 +20,8 @@ def input_students
 end
 
 def print_header
-    puts "The students of Villains Academy"
-    puts "-------------"
+    puts "The students of Villains Academy".center(100)
+    puts "-------------".center(100)
 end
 
 # added a new argument letter with a default value of nil, so if no letter is entered the 
@@ -31,8 +31,8 @@ def print(students, letter = nil)
     students.select { |student| student[:name].length < 12 }
     
     # gets the letter from the user
-    puts "Do you want to print out the students beginning with a certain letter?"
-    puts "If so input that letter now followed by return, if not just press return:"
+    puts "Do you want to print out the students beginning with a certain letter?".center(100)
+    puts "If so input that letter now followed by return, if not just press return:".center(100)
     
     letter = gets.chomp
     
@@ -44,14 +44,14 @@ def print(students, letter = nil)
     # used each_with_index to call a block with two arguments for each item in the enum.
     # The "+1" next to index in the string interpolation is to make the iteration start at 1 instead of 0.
     students.each_with_index do |student, index|
-    puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort)".center(100)
     end
     
 end
 
 
 def print_footer(names)
-    puts "Overall, we have #{names.count} great students"
+    puts "Overall, we have #{names.count} great students".center(100)
 end
 
 students = input_students
