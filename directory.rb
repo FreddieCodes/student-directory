@@ -4,10 +4,17 @@ def input_students
     puts "(To finish, just hit return twice)"
     # create an empty array
     students = []
+    months = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december]
     # get the first name
     name = gets.gsub(/\n/, "")
     puts "What cohort is this student in:"
     cohort = gets.gsub(/\n/, "").downcase.to_sym
+    # if the cohort inputted does not match any of the months in the months array then 
+    # this until loop will keep asking for the cohort until a valid month is entered. (Typos)
+    until months.include?(cohort)
+        puts "The cohort month you entered was invalid please try again, do not use abbreviations:"
+        cohort = gets.gsub(/\n/, "").downcase.to_sym
+    end
     # while the name is not empty, repeat this code
     while !name.empty? do
         # this line says that if cohort is equal to a blank string that's been converted to a symbol
