@@ -58,21 +58,24 @@ def print(students, letter = nil)
     # are true and stores them in array form.
     students.select! { |student| student[:name].start_with?(letter) }
     # modified the students method to allow it to print a number before each of each student
-    # used each_with_index to call a block with two arguments for each item in the enum.
-    # The "+1" next to index in the string interpolation is to make the iteration start at 1 instead of 0.
-    students.each_with_index do |student, index|
-    puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort)".center(100)
-    end
-    
+    # used a while loop to keep executing the code while student count is more than the counter which we set to 0.
+    # The "+1" next to counter in the string interpolation is to make the iteration start at 1 instead of 0.
+     counter = 0
+    # .length allows us to change the students array into a number that I set to student_count
+     student_count = students.length
+      while counter < student_count
+        puts "#{counter+1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)".center(100)
+      counter += 1
+     end
 end
 
 # Prints the students grouped by cohort using the group_by method.
 def print_cohorts(students)
     students = students.group_by {|hash| hash[:cohort]}.values
     students.each do |student|
-        student.each_with_index do |stu, index|
-            puts "#{index +1}. #{stu[:name]} (#{stu[:cohort]} cohort)".center(100)
-        end
+      student.each_with_index do |stu, index|
+        puts "#{index +1}. #{stu[:name]} (#{stu[:cohort]} cohort)".center(100)
+      end
     end
 end
 
@@ -88,7 +91,7 @@ end
 
 students = input_students
 # nothing happends until we call the methods
-# print_header
-print_cohorts(students)
-#print(students)
-#print_footer(students)
+print_header
+# print_cohorts(students)
+print(students)
+print_footer(students)
