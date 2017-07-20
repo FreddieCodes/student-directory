@@ -1,19 +1,29 @@
 # Let's put all students into an array
 def input_students
-    puts "Please enter the name of the students"
-    puts "To finish, just hit return twice"
+    puts "Please enter the name of the student:"
+    puts "(To finish, just hit return twice)"
     # create an empty array
     students = []
     # get the first name
     name = gets.chomp
+    puts "What cohort is this student in:"
+    cohort = gets.chomp.downcase.to_sym
     # while the name is not empty, repeat this code
     while !name.empty? do
+        # this line says that if cohort is equal to a blank string that's been converted to a symbol
+        # then the default value for cohort will be set to :november
+        cohort = :november if cohort == :""
         # add the student hash to the array
         # added more information hobbies, country and height
-        students << {name: name, cohort: :november, hobbies: :reading, country: :UK, height: :tall}
+        students << {name: name, cohort: cohort, hobbies: :reading, country: :UK, height: :tall}
         puts "Now we have #{students.count} students"
         # get another name from the user
+        puts "Please enter the name of the next student:"
+        puts "(To finish, just hit return twice)"
         name = gets.chomp
+        # stops the program for asking for the cohort if the name field is blank
+        puts "What cohort is this student in:" if name != ""
+        cohort = gets.chomp.downcase.to_sym  
     end
     # return the array of students
     students
