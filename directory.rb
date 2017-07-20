@@ -9,6 +9,7 @@ def input_students
     name = gets.gsub(/\n/, "")
     puts "What cohort is this student in:"
     cohort = gets.gsub(/\n/, "").downcase.to_sym
+    cohort = :november if cohort == :""
     # if the cohort inputted does not match any of the months in the months array then 
     # this until loop will keep asking for the cohort until a valid month is entered. (Typos)
     until months.include?(cohort)
