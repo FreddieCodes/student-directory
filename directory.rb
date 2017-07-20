@@ -5,9 +5,9 @@ def input_students
     # create an empty array
     students = []
     # get the first name
-    name = gets.chomp
+    name = gets.gsub(/\n/, "")
     puts "What cohort is this student in:"
-    cohort = gets.chomp.downcase.to_sym
+    cohort = gets.gsub(/\n/, "").downcase.to_sym
     # while the name is not empty, repeat this code
     while !name.empty? do
         # this line says that if cohort is equal to a blank string that's been converted to a symbol
@@ -20,10 +20,10 @@ def input_students
         # get another name from the user
         puts "Please enter the name of the next student:"
         puts "(To finish, just hit return twice)"
-        name = gets.chomp
+        name = gets.gsub(/\n/, "")
         # stops the program for asking for the cohort if the name field is blank
         puts "What cohort is this student in:" if name != ""
-        cohort = gets.chomp.downcase.to_sym  
+        cohort = gets.gsub(/\n/, "").downcase.to_sym  
     end
     # return the array of students
     students
@@ -44,7 +44,7 @@ def print(students, letter = nil)
     puts "Do you want to print out the students beginning with a certain letter?".center(100)
     puts "If so input that letter now followed by return, if not just press return:".center(100)
     
-    letter = gets.chomp
+    letter = gets.gsub(/\n/, "")
     
     # takes the student array and runs the select method on it then passes it a block that
     # targets the starting letter of the students name [:name] and only selects the elements that
