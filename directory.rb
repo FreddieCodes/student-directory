@@ -22,9 +22,11 @@ def process(selection)
       when "2"
         show_students
       when "3"
-        save_students
+        save_students 
+        puts "#{action_successfull} students saved"
       when "4"
         load_students
+        puts "#{action_successfull} students loaded"
       when "9"
         exit # causes the program to terminate
       else
@@ -130,6 +132,10 @@ end
 
 def add_to_array(name, cohort)
     @students << {name: name, cohort: cohort.to_sym}
+end
+
+def action_successfull
+    print "Action successfull:"
 end
 # nothing happends until we call the method
 try_load_students
