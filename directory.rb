@@ -52,8 +52,8 @@ def input_students
  
     while !name.empty? do
         cohort = :november if cohort == :""
+        
         add_to_array(name, cohort)
-        # @students << {name: name, cohort: cohort}
         if @students.count > 1
           puts "Now we have #{@students.count} students"
         elsif @students.count == 1 
@@ -111,14 +111,14 @@ def load_students(filename = "students.csv")
     file.readlines.each do |line|
         name, cohort = line.chomp.split(",")
         add_to_array(name, cohort)
-       # @students << {name: name, cohort: cohort.to_sym}
     end
     file.close
 end
 
 def try_load_students
     filename = ARGV.first #first argument from the command line
-    return if filename.nil? # get out of methof if it isn't given
+    # if no argument is given load students.csv by default
+    filename = "students.csv" if filename.nil?
     if File.exists?(filename) # if it exists
       load_students(filename)
       puts "Loaded #{@students.count} from #{filename}"
