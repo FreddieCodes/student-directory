@@ -18,16 +18,19 @@ end
 def process(selection)
     case selection
       when "1"
+        puts "You have chosen to input students"
         students = input_students
       when "2"
+        puts "You have chosen to show students"  
         show_students
       when "3"
+        puts "You have chosen to save the list of students"
         save_students 
-        puts "#{action_successfull} students saved"
       when "4"
+        puts "You have chosen to load the list of students"
         load_students
-        puts "#{action_successfull} students loaded"
       when "9"
+        puts "You have exited the program"  
         exit # causes the program to terminate
       else
         puts "I don't know what you meant, try again"
@@ -134,9 +137,6 @@ def add_to_array(name, cohort)
     @students << {name: name, cohort: cohort.to_sym}
 end
 
-def action_successfull
-    print "Action successfull:"
-end
 # nothing happends until we call the method
 try_load_students
 interactive_menu
