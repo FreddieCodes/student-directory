@@ -52,8 +52,8 @@ def input_students
  
     while !name.empty? do
         cohort = :november if cohort == :""
-      
-        @students << {name: name, cohort: cohort}
+        add_to_array(name, cohort)
+        # @students << {name: name, cohort: cohort}
         if @students.count > 1
           puts "Now we have #{@students.count} students"
         elsif @students.count == 1 
@@ -110,7 +110,8 @@ def load_students(filename = "students.csv")
     file = File.open(filename, "r")
     file.readlines.each do |line|
         name, cohort = line.chomp.split(",")
-        @students << {name: name, cohort: cohort.to_sym}
+        add_to_array(name, cohort)
+       # @students << {name: name, cohort: cohort.to_sym}
     end
     file.close
 end
@@ -126,10 +127,10 @@ def try_load_students
       exit # quit the program
     end
 end
-        
-    
 
-
+def add_to_array(name, cohort)
+    @students << {name: name, cohort: cohort.to_sym}
+end
 # nothing happends until we call the method
 try_load_students
 interactive_menu
