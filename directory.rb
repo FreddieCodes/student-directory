@@ -1,10 +1,10 @@
-@students = []  # an emppty array accesible to all methods
+@students = []  # an empty array accesible to all methods
 
 def print_menu
     puts "1. Input the students"
     puts "2. Show the students"
-    puts "3. Save the list to students.csv"
-    puts "4. Load the list from students.csv"
+    puts "3. Save the list"
+    puts "4. Load the list"
     puts "9. Exit" # 9 because we'll be adding more items
 end
 
@@ -27,7 +27,7 @@ def process(selection)
         puts "You have chosen to save the list of students"
         save_students 
       when "4"
-        puts "You have chosen to load the list of students"
+        puts "You have chosen to load a list of students"
         load_students
       when "9"
         puts "You have exited the program"  
@@ -100,8 +100,10 @@ def print_footer
 end
 
 def save_students
+    puts "Please type the name of the file you want to save the students to:"
+    filename = gets.chomp
     # open the file for writing
-    file = File.open("students.csv", "w")
+    file = File.open("#{filename}", "w")
     # iterate over the array of students
     @students.each do |student|
         student_data = [student[:name], student[:cohort]]
@@ -112,6 +114,8 @@ def save_students
 end
 
 def load_students(filename = "students.csv")
+    puts "Please type the name of the file you want to load:"
+    filename = gets.chomp
     file = File.open(filename, "r")
     file.readlines.each do |line|
         name, cohort = line.chomp.split(",")
@@ -138,7 +142,7 @@ def add_to_array(name, cohort)
 end
 
 # nothing happends until we call the method
-try_load_students
+# try_load_students
 interactive_menu
 
 
