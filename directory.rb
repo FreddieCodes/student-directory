@@ -1,3 +1,4 @@
+require 'csv'
 @students = []  # an empty array accesible to all methods
 
 def print_menu
@@ -19,7 +20,7 @@ def process(selection)
     case selection
       when "1"
         puts "You have chosen to input students"
-        students = input_students
+        input_students
       when "2"
         puts "You have chosen to show students"  
         show_students
@@ -59,22 +60,25 @@ def input_students
         cohort = :november if cohort == :""
         
         add_to_array(name, cohort)
-        if @students.count > 1
-          puts "Now we have #{@students.count} students"
-        elsif @students.count == 1 
-          puts "Now we have #{@students.count} student"
-        end
+        plural
         
         puts "Please enter the name of the next student:"
         puts "(To finish, just hit return twice)"
-        name = gets.gsub(/\n/, "")
+        name = STDIN.gets.gsub(/\n/, "")
 
         puts "What cohort is this student in:" if name != ""
-        cohort = gets.gsub(/\n/, "").downcase.to_sym  
+        cohort = STDIN.gets.gsub(/\n/, "").downcase.to_sym  
     end
 end
 
-
+def plural
+  if @students.count > 1
+    puts "Now we have #{@students.count} students"
+  elsif @students.count == 1 
+    puts "Now we have #{@students.count} student"
+  end
+end
+        
 def show_students
     print_header
     print_student_list
@@ -101,27 +105,23 @@ end
 
 def save_students
     puts "Please type the name of the file you want to save the students to:"
-    filename = gets.chomp
-    # open the file for writing
-    file = File.open("#{filename}", "w") do |file|
+    filename = STDIN.gets.chomp
+    # open the file for writing using CSV
+    CSV.open("#{filename}", "w") do |csv| 
     # iterate over the array of students
       @students.each do |student|
-          student_data = [student[:name], student[:cohort]]
-          csv_line = student_data.join(",")
-          file.puts csv_line
+          csv << [student[:name], student[:cohort]]
       end
     end
 end
 
 def load_students(filename = "students.csv")
     puts "Please type the name of the file you want to load:"
-    filename = gets.chomp
-    file = File.open(filename, "r") do |file|
-      file.readlines.each do |line|
-          name, cohort = line.chomp.split(",")
+    filename = STDIN.gets.chomp
+    CSV.foreach("#{filename}", "r") do |row|
+          name, cohort = row[0], row[1]
           add_to_array(name, cohort)
       end
-    end
 end
 
 def try_load_students
@@ -138,9 +138,8 @@ def try_load_students
 end
 
 def add_to_array(name, cohort)
-    @students << {name: name, cohort: cohort.to_sym}
+    @students << {name: name, cohort: cohort.downcase.to_sym}
 end
-
 # nothing happends until we call the method
 # try_load_students
 interactive_menu
